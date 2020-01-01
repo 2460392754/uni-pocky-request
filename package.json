@@ -1,0 +1,39 @@
+{
+    "name": "uni-pocky-request",
+    "version": "1.0.0",
+    "description": "request",
+    "main": "./dist/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "ts": "tsc",
+        "ts:watch": "tsc -w",
+        "eslint": "eslint --fix --ext .ts src/",
+        "prettier": "prettier --write -c src/**"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/2460392754/uni-pocky-request.git"
+    },
+    "keywords": [
+        "uniapp",
+        "uni-app",
+        "request",
+        "pocky"
+    ],
+    "author": "pocky",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/2460392754/uni-pocky-request/issues"
+    },
+    "homepage": "https://github.com/2460392754/uni-pocky-request#readme",
+    "devDependencies": {
+        "@types/uni-app": "^1.4.1",
+        "@typescript-eslint/eslint-plugin": "^2.14.0",
+        "@typescript-eslint/parser": "^2.14.0",
+        "eslint": "^6.8.0",
+        "eslint-config-alloy": "^3.5.0",
+        "prettier": "^1.19.1",
+        "typescript": "^3.7.4"
+    },
+    "dependencies": {}
+}
