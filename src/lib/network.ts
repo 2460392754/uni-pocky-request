@@ -4,6 +4,8 @@ import { IMergeAfterConfig } from '../interface';
 export const xhr = function(config: IMergeAfterConfig) {
     let instance;
 
+    console.log(config);
+
     const promise = new Promise((resolve, reject) => {
         instance = uni.request({
             ...config,

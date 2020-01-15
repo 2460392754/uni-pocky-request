@@ -36,10 +36,6 @@ interface ICommonConfig extends IObject {
     header?: any;
     dataType?: string;
     responseType?: string;
-    onProgressUpdate?: Function;
-    onHeadersReceived?: Function;
-    offProgressUpdate?: Function;
-    offHeadersReceived?: Function;
 }
 
 export interface IMergeBeforeConfig extends ICommonConfig {
@@ -47,7 +43,7 @@ export interface IMergeBeforeConfig extends ICommonConfig {
     method?: IBeforeMethod;
     params?: IObject;
     header?: {
-        // [prop: string]: any;
+        [prop: string]: any;
         contentType?: string;
     };
 }
@@ -59,3 +55,26 @@ export interface IMergeAfterConfig extends ICommonConfig {
 }
 
 export type INetWorkType = 'xhr' | 'upload' | 'download';
+
+export interface ICreateResult {
+    interceptors: {
+        request: IInterfaceHandler;
+        response: IInterfaceHandler;
+    };
+    request(config: IMergeBeforeConfig): Promise<any>;
+    get(url: string, config?: IMergeBeforeConfig): Promise<any>;
+    post(url: string, config?: IMergeBeforeConfig): Promise<any>;
+    put(url: string, config?: IMergeBeforeConfig): Promise<any>;
+    delete(url: string, config?: IMergeBeforeConfig): Promise<any>;
+    connect(url: string, config?: IMergeBeforeConfig): Promise<any>;
+    head(url: string, config?: IMergeBeforeConfig): Promise<any>;
+    options(url: string, config?: IMergeBeforeConfig): Promise<any>;
+    trace(url: string, config?: IMergeBeforeConfig): Promise<any>;
+    download(url: string, config?: IMergeBeforeConfig): Promise<any>;
+    upload(url: string, config: IMergeBeforeConfig): Promise<any>;
+    abort(): void;
+    onProgressUpdate?: Function;
+    onHeadersReceived?: Function;
+    offProgressUpdate?: Function;
+    offHeadersReceived?: Function;
+}

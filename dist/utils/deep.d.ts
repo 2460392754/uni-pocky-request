@@ -1,3 +1,2 @@
-import { IObject } from '../interface';
-export declare const deepCopy: (...args: IObject[]) => object;
-export declare const extend: (target: any, obj: any, args?: any) => any;
+export declare const deepCopy: (...args: object[]) => any;
+export declare const extend: (a: object, b: object, args?: any) => any;

@@ -10,7 +10,7 @@ import { isType } from './other';
  */
 export const adapterContentType = function(
     defaultHeader: {} | any,
-    instanceHeader: {} | any,
+    instanceHeader: any = {},
     configHeader: any
 ) {
     const LIST: string[] = [

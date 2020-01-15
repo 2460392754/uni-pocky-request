@@ -1,5 +1,6 @@
 export const xhr = function (config) {
     let instance;
+    console.log(config);
     const promise = new Promise((resolve, reject) => {
         instance = uni.request({
             ...config,

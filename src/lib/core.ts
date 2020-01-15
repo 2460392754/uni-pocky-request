@@ -7,10 +7,12 @@ import {
 import { Interceptor } from './interceptor';
 import { merge } from './merge';
 import * as network from './network';
+import { deepCopy } from '../utils';
 
-export class myRequest {
+export class MyRequest {
     private readonly globalConfig: IMergeBeforeConfig;
-    static interceptors = {
+
+    interceptors = {
         request: new Interceptor(),
         response: new Interceptor()
     };
@@ -19,7 +21,7 @@ export class myRequest {
         this.globalConfig = globalConfig;
     }
 
-    request(config: IMergeBeforeConfig = {}) {
+    request(config: IMergeBeforeConfig) {
         // 设置默认 config.method
         if (!config.method && !this.globalConfig.method) {
             config.method = 'get';
@@ -31,15 +33,17 @@ export class myRequest {
             ? (config.method as string)
             : 'xhr';
         let promise = Promise.resolve(config);
-        const chain: any[] = [network[networkType as INetWorkType]];
+        const chain: any[] = [network[networkType as INetWorkType], null];
 
-        myRequest.interceptors.request.forEach((interceptor: IInterfaceHandler) => {
+        this.interceptors.request.forEach((interceptor: IInterfaceHandler) => {
             chain.unshift(interceptor.fulfilled, interceptor.rejected);
         });
 
-        myRequest.interceptors.response.forEach((interceptor: IInterfaceHandler) => {
+        this.interceptors.response.forEach((interceptor: IInterfaceHandler) => {
             chain.push(interceptor.fulfilled, interceptor.rejected);
         });
+
+        console.log(chain);
 
         while (chain.length) {
             promise = promise.then(chain.shift(), chain.shift());
@@ -48,9 +52,40 @@ export class myRequest {
         return promise;
     }
 
+    // get(url: string, config: IMergeBeforeConfig = {}) {
+    //     const newConfig = deepCopy(config, {
+    //         url,
+    //         method: 'get'
+    //     });
+
+    //     return this.request(newConfig);
+    // }
+
+    // post(url: string, config: IMergeBeforeConfig = {}) {
+    //     const newConfig = deepCopy(config, {
+    //         url,
+    //         method: 'post'
+    //     });
+
+    //     return this.request(newConfig);
+    // }
+
     abort(instance: any) {
         try {
             instance.example.abort();
         } catch (e) {}
     }
 }
+
+['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'upload', 'download'].forEach(
+    (method) => {
+        MyRequest.prototype[method] = function(url, config = {}) {
+            const newConfig = deepCopy(config, {
+                url,
+                method
+            });
+
+            return this.request(newConfig);
+        };
+    }
+);

@@ -1,0 +1,11 @@
+node_modules/
+src/
+test/
+
+tsconfig.json
+.eslintrc.js
+.prettierrc.js
+App.vue
+main.js
+manifest.json
+pages.json

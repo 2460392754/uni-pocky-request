@@ -1,3 +1,3 @@
-import { IMergeBeforeConfig } from './interface';
-declare const create: (config: IMergeBeforeConfig) => any;
+import { IMergeBeforeConfig, ICreateResult } from './interface';
+declare const create: (config: IMergeBeforeConfig) => ICreateResult;
 export default create;

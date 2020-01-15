@@ -1,9 +1,9 @@
-import { myRequest } from './lib/core';
+import { MyRequest } from './lib/core';
 import { extend } from './utils/index';
 const create = function (config) {
-    const ctx = new myRequest(config);
-    let instance = myRequest.prototype.request.bind(ctx);
-    instance = extend(instance, myRequest.prototype, ctx);
+    const ctx = new MyRequest(config);
+    let instance = MyRequest.prototype.request.bind(ctx);
+    instance = extend(MyRequest.prototype, ctx);
     instance = extend(instance, ctx);
     return instance;
 };

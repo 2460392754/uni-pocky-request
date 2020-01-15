@@ -1,6 +1,6 @@
 import { deepCopy } from './deep';
 import { isType } from './other';
-export const adapterContentType = function (defaultHeader, instanceHeader, configHeader) {
+export const adapterContentType = function (defaultHeader, instanceHeader = {}, configHeader) {
     const LIST = [
         'content-type',
         'Content-type',

@@ -1,20 +1,14 @@
 import { isType } from './other';
 export const deepCopy = function (...args) {
-    let container = {};
+    let res = {};
     args.forEach((arg) => {
         for (const key in arg) {
-            container = assginValue({
-                key,
-                val: arg[key],
-                container,
-                callback: deepCopy
-            });
+            res = assginValue(key, arg[key], res, deepCopy);
         }
     });
-    return container;
+    return res;
 };
-const assginValue = function (opts) {
-    const { callback, container, key, val } = opts;
+const assginValue = function (key, val, container, callback) {
     const cTypeIsObj = isType('Object', container[key]);
     const vTypeIsObj = isType('Object', val);
     if (cTypeIsObj && vTypeIsObj) {
@@ -28,15 +22,15 @@ const assginValue = function (opts) {
     }
     return container;
 };
-export const extend = function (target, obj, args) {
-    for (const key in obj) {
-        const val = obj[key];
+export const extend = function (a, b, args) {
+    for (const key in b) {
+        const val = b[key];
         if (args && isType('Function', val)) {
-            target[key] = val.bind(args);
+            a[key] = val.bind(args);
         }
         else {
-            target[key] = val;
+            a[key] = val;
         }
     }
-    return target;
+    return a;
 };
