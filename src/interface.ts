@@ -11,10 +11,16 @@ export interface IObject {
 
 export interface IInterfaceHandler {
     fulfilled: IFulfilled;
-    rejected: undefined | IRejected;
+    rejected: null | IRejected;
 }
 
-export type IFulfilled = (config: object, res: object) => false | object;
+export interface IInterceptor {
+    use(fulfilled: IFulfilled, rejected?: null | IRejected): number;
+    eject(id: number): void;
+    forEach(fn: Function): void;
+}
+
+export type IFulfilled = (config: IMergeAfterConfig, res?: object) => false | object;
 
 export type IRejected = (error: object) => false | object;
 
@@ -41,7 +47,8 @@ interface ICommonConfig extends IObject {
 export interface IMergeBeforeConfig extends ICommonConfig {
     baseURL?: string;
     method?: IBeforeMethod;
-    params?: IObject;
+    params?: any;
+    data?: any;
     header?: {
         [prop: string]: any;
         contentType?: string;
@@ -49,17 +56,21 @@ export interface IMergeBeforeConfig extends ICommonConfig {
 }
 
 export interface IMergeAfterConfig extends ICommonConfig {
-    url?: string;
-    method?: IAfterMethod;
+    baseURL: string;
+    relativeURL: string;
+    fullURL: string;
+    method: IAfterMethod;
     header?: any;
+    params?: any;
+    data?: any;
 }
 
 export type INetWorkType = 'xhr' | 'upload' | 'download';
 
 export interface ICreateResult {
     interceptors: {
-        request: IInterfaceHandler;
-        response: IInterfaceHandler;
+        request: IInterceptor;
+        response: IInterceptor;
     };
     request(config: IMergeBeforeConfig): Promise<any>;
     get(url: string, config?: IMergeBeforeConfig): Promise<any>;

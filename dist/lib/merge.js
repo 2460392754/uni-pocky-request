@@ -44,7 +44,8 @@ export const merge = function (globalConfig, instanceConfig = {}) {
         }
     });
     const url = getFullURL(newConfig.baseURL, newConfig.url);
-    newConfig.url = paramsToURL(url, newConfig.params);
+    newConfig.relativeURL = newConfig.url;
+    newConfig.fullURL = paramsToURL(url, newConfig.params);
     newConfig.header = adapterContentType(globalConfig.header, instanceConfig.header, newConfig.header);
     if (newConfig.method === 'upload') {
         Reflect.deleteProperty(newConfig.header, 'content-type');

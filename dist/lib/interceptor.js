@@ -2,7 +2,7 @@ export class Interceptor {
     constructor() {
         this.handlers = [];
     }
-    use(fulfilled, rejected) {
+    use(fulfilled, rejected = null) {
         this.handlers.push({
             fulfilled,
             rejected

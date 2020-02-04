@@ -2,9 +2,9 @@ node_modules/
 src/
 test/
 
-tsconfig.json
 .eslintrc.js
 .prettierrc.js
+tsconfig.json
 App.vue
 main.js
 manifest.json

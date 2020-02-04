@@ -1,14 +1,18 @@
 import { toJSON } from '../utils/index';
 import { IMergeAfterConfig } from '../interface';
+import { merge } from './merge';
 
 export const xhr = function(config: IMergeAfterConfig) {
     let instance;
 
-    console.log(config);
-
     const promise = new Promise((resolve, reject) => {
+        config = merge(config);
+
         instance = uni.request({
-            ...config,
+            url: config.fullURL,
+            method: config.method,
+            header: config.header,
+            data: config.data,
             success: resolve,
             fail: reject
         });
@@ -23,6 +27,7 @@ export const upload = function(config: IMergeAfterConfig) {
     const promise = new Promise((resolve, reject) => {
         instance = uni.uploadFile({
             ...config,
+            url: config.fullURL,
             // success: (res) => {
             //     res.data = toJSON(res.data);
 
@@ -44,6 +49,7 @@ export const download = function(config: IMergeAfterConfig) {
     const promise = new Promise((resolve, reject) => {
         instance = uni.downloadFile({
             ...config,
+            url: config.fullURL,
             success: resolve,
             fail: reject
         });

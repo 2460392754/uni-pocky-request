@@ -1,7 +1,7 @@
 {
-    "name": "uni-pocky-request",
-    "version": "1.0.2",
-    "description": "request",
+    "name": "@pocky/uni-request",
+    "version": "1.0.4",
+    "description": "uniapp的request请求插件",
     "main": "./dist/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -32,8 +32,7 @@
         "@typescript-eslint/parser": "^2.14.0",
         "eslint": "^6.8.0",
         "eslint-config-alloy": "^3.5.0",
-        "prettier": "^1.19.1",
-        "typescript": "^3.7.4"
+        "prettier": "^1.19.1"
     },
     "dependencies": {}
 }

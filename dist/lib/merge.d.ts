@@ -1,2 +1,2 @@
-import { IMergeBeforeConfig } from '../interface';
-export declare const merge: (globalConfig: IMergeBeforeConfig, instanceConfig?: IMergeBeforeConfig) => IMergeBeforeConfig;
+import { IMergeBeforeConfig, IMergeAfterConfig } from '../interface';
+export declare const merge: (globalConfig: IMergeAfterConfig | IMergeBeforeConfig, instanceConfig?: IMergeBeforeConfig) => IMergeAfterConfig;

@@ -14,11 +14,11 @@ export class MyRequest {
         if (!config.method && !this.globalConfig.method) {
             config.method = 'get';
         }
-        config = merge(this.globalConfig, config);
-        let networkType = ['upload', 'download'].includes(config.method)
-            ? config.method
+        const newConfig = merge(this.globalConfig, config);
+        let networkType = ['upload', 'download'].includes(newConfig.method)
+            ? newConfig.method
             : 'xhr';
-        let promise = Promise.resolve(config);
+        let promise = Promise.resolve(newConfig);
         const chain = [network[networkType], null];
         this.interceptors.request.forEach((interceptor) => {
             chain.unshift(interceptor.fulfilled, interceptor.rejected);
@@ -26,7 +26,6 @@ export class MyRequest {
         this.interceptors.response.forEach((interceptor) => {
             chain.push(interceptor.fulfilled, interceptor.rejected);
         });
-        console.log(chain);
         while (chain.length) {
             promise = promise.then(chain.shift(), chain.shift());
         }

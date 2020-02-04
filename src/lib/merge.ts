@@ -1,4 +1,4 @@
-import { IMergeBeforeConfig, IObject } from '../interface';
+import { IMergeBeforeConfig, IMergeAfterConfig, IObject } from '../interface';
 import { isType, deepCopy, getFullURL, paramsToURL, adapterContentType } from '../utils/index';
 
 const CONFIG_KEY_LIST = ['url', 'method', 'data', 'dataType', 'responseType', 'params'];
@@ -11,9 +11,9 @@ const CONFIG_ALL_KEY_LIST = [
 ];
 
 export const merge = function(
-    globalConfig: IMergeBeforeConfig,
+    globalConfig: IMergeBeforeConfig | IMergeAfterConfig,
     instanceConfig: IMergeBeforeConfig = {}
-) {
+): IMergeAfterConfig {
     // globalConfig + instanceConfig 所有字段去重后的key
     const ARGS_ALL_KEY_LIST = [
         ...new Set([...Object.keys(instanceConfig), ...Object.keys(globalConfig)])
@@ -24,7 +24,7 @@ export const merge = function(
         (key) => !CONFIG_ALL_KEY_LIST.includes(key)
     );
 
-    const newConfig: IMergeBeforeConfig = {};
+    const newConfig: any = {};
 
     // 必要参数
     CONFIG_KEY_LIST.forEach((prop) => {
@@ -67,7 +67,8 @@ export const merge = function(
     });
 
     const url = getFullURL(newConfig.baseURL, newConfig.url);
-    newConfig.url = paramsToURL(url, newConfig.params as IObject);
+    newConfig.relativeURL = newConfig.url;
+    newConfig.fullURL = paramsToURL(url, newConfig.params as IObject);
     newConfig.header = adapterContentType(
         globalConfig.header,
         instanceConfig.header,

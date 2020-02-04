@@ -1,7 +1,7 @@
-import { IInterfaceHandler, IFulfilled, IRejected } from '../interface';
+import { IFulfilled, IRejected } from '../interface';
 
 export class Interceptor {
-    private handlers: (IInterfaceHandler | null)[] = [];
+    private handlers: { fulfilled: IFulfilled; rejected: null | IRejected }[] = [];
 
     /**
      * 添加 拦截器
@@ -9,7 +9,7 @@ export class Interceptor {
      * @param {Function} rejected  Promise.reject里运行的函数
      * @return {Number} 拦截器队列中注册的下标id
      */
-    use(fulfilled: IFulfilled, rejected?: undefined | IRejected): number {
+    use(fulfilled: IFulfilled, rejected: null | IRejected = null): number {
         this.handlers.push({
             fulfilled,
             rejected

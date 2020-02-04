@@ -1,7 +1,7 @@
 import {
     IMergeBeforeConfig,
-    IInterfaceHandler,
     IMergeAfterConfig,
+    IInterfaceHandler,
     INetWorkType
 } from '../interface';
 import { Interceptor } from './interceptor';
@@ -27,12 +27,12 @@ export class MyRequest {
             config.method = 'get';
         }
 
-        config = merge(this.globalConfig, config);
+        const newConfig = merge(this.globalConfig, config);
 
-        let networkType = ['upload', 'download'].includes(config.method as string)
-            ? (config.method as string)
+        let networkType = ['upload', 'download'].includes(newConfig.method as string)
+            ? (newConfig.method as string)
             : 'xhr';
-        let promise = Promise.resolve(config);
+        let promise = Promise.resolve(newConfig);
         const chain: any[] = [network[networkType as INetWorkType], null];
 
         this.interceptors.request.forEach((interceptor: IInterfaceHandler) => {
@@ -43,32 +43,12 @@ export class MyRequest {
             chain.push(interceptor.fulfilled, interceptor.rejected);
         });
 
-        console.log(chain);
-
         while (chain.length) {
             promise = promise.then(chain.shift(), chain.shift());
         }
 
         return promise;
     }
-
-    // get(url: string, config: IMergeBeforeConfig = {}) {
-    //     const newConfig = deepCopy(config, {
-    //         url,
-    //         method: 'get'
-    //     });
-
-    //     return this.request(newConfig);
-    // }
-
-    // post(url: string, config: IMergeBeforeConfig = {}) {
-    //     const newConfig = deepCopy(config, {
-    //         url,
-    //         method: 'post'
-    //     });
-
-    //     return this.request(newConfig);
-    // }
 
     abort(instance: any) {
         try {
@@ -79,7 +59,7 @@ export class MyRequest {
 
 ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'upload', 'download'].forEach(
     (method) => {
-        MyRequest.prototype[method] = function(url, config = {}) {
+        MyRequest.prototype[method] = function(url: string, config = {}) {
             const newConfig = deepCopy(config, {
                 url,
                 method

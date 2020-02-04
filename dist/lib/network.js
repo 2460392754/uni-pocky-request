@@ -1,9 +1,13 @@
+import { merge } from './merge';
 export const xhr = function (config) {
     let instance;
-    console.log(config);
     const promise = new Promise((resolve, reject) => {
+        config = merge(config);
         instance = uni.request({
-            ...config,
+            url: config.fullURL,
+            method: config.method,
+            header: config.header,
+            data: config.data,
             success: resolve,
             fail: reject
         });

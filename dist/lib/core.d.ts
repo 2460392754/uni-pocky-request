@@ -1,4 +1,4 @@
-import { IMergeBeforeConfig } from '../interface';
+import { IMergeBeforeConfig, IMergeAfterConfig } from '../interface';
 import { Interceptor } from './interceptor';
 export declare class MyRequest {
     private readonly globalConfig;
@@ -7,6 +7,6 @@ export declare class MyRequest {
         response: Interceptor;
     };
     constructor(globalConfig: IMergeBeforeConfig);
-    request(config: IMergeBeforeConfig): Promise<IMergeBeforeConfig>;
+    request(config: IMergeBeforeConfig): Promise<IMergeAfterConfig>;
     abort(instance: any): void;
 }
