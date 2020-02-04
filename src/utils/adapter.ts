@@ -9,7 +9,7 @@ import { isType } from './other';
  * @return {Object}
  */
 export const adapterContentType = function(
-    defaultHeader: {} | any,
+    defaultHeader: any = {},
     instanceHeader: any = {},
     configHeader: any
 ) {
