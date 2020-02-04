@@ -11,4 +11,4 @@ export const createSingleInstance = function (config) {
     instance = extend(instance, ctx);
     return instance;
 };
-export default create;
+export default createInstance;

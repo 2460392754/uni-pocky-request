@@ -20,4 +20,4 @@ export const createSingleInstance = function(config: IMergeBeforeConfig) {
     return instance;
 };
 
-export default create;
+export default createInstance;
