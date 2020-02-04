@@ -1,6 +1,10 @@
 import { MyRequest } from './lib/core';
 import { extend } from './utils/index';
-const create = function (config) {
+export const createInstance = function (config) {
+    let instance = new MyRequest(config);
+    return instance;
+};
+export const createSingleInstance = function (config) {
     const ctx = new MyRequest(config);
     let instance = MyRequest.prototype.request.bind(ctx);
     instance = extend(MyRequest.prototype, ctx);

@@ -83,7 +83,7 @@ export interface ICreateResult {
     trace(url: string, config?: IMergeBeforeConfig): Promise<any>;
     download(url: string, config?: IMergeBeforeConfig): Promise<any>;
     upload(url: string, config: IMergeBeforeConfig): Promise<any>;
-    abort(): void;
+    abort(instance: any): void;
     onProgressUpdate?: Function;
     onHeadersReceived?: Function;
     offProgressUpdate?: Function;

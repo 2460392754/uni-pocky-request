@@ -19,6 +19,7 @@ export const upload = function (config) {
     const promise = new Promise((resolve, reject) => {
         instance = uni.uploadFile({
             ...config,
+            url: config.fullURL,
             success: resolve,
             fail: reject
         });
@@ -31,6 +32,7 @@ export const download = function (config) {
     const promise = new Promise((resolve, reject) => {
         instance = uni.downloadFile({
             ...config,
+            url: config.fullURL,
             success: resolve,
             fail: reject
         });
