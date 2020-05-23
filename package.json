@@ -1,6 +1,6 @@
 {
     "name": "@pocky/uni-request",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "uniapp的request请求插件",
     "main": "./dist/index.js",
     "scripts": {

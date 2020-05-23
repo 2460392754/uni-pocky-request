@@ -27,7 +27,11 @@ export class MyRequest {
             chain.push(interceptor.fulfilled, interceptor.rejected);
         });
         while (chain.length) {
-            promise = promise.then(chain.shift(), chain.shift());
+            while (chain.length) {
+                const resolved = chain.shift();
+                const rejected = chain.shift();
+                promise = promise.then((res) => resolved(res, config), rejected);
+            }
         }
         return promise;
     }
