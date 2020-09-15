@@ -27,11 +27,9 @@ export class MyRequest {
             chain.push(interceptor.fulfilled, interceptor.rejected);
         });
         while (chain.length) {
-            while (chain.length) {
-                const resolved = chain.shift();
-                const rejected = chain.shift();
-                promise = promise.then((res) => resolved(res, config), rejected);
-            }
+            const resolved = chain.shift();
+            const rejected = chain.shift();
+            promise = promise.then((res) => resolved(res, config), (err) => rejected(err, config));
         }
         return promise;
     }
