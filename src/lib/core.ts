@@ -50,8 +50,8 @@ export class MyRequest {
             // promise = promise.then(chain.shift(), chain.shift());
             // promise = promise.then((res) => resolved(res, config), rejected);
             promise = promise.then(
-                (res) => resolved(res, config),
-                (err) => rejected(err, config)
+                (res) => resolved(res, newConfig),
+                (err) => rejected(err, newConfig)
             );
         }
 
@@ -67,7 +67,7 @@ export class MyRequest {
 
 ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'upload', 'download'].forEach(
     (method) => {
-        MyRequest.prototype[method] = function (url: string, config = {}) {
+        MyRequest.prototype[method] = function(url: string, config = {}) {
             const newConfig = deepCopy(config, {
                 url,
                 method

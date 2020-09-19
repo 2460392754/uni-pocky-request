@@ -29,7 +29,7 @@ export class MyRequest {
         while (chain.length) {
             const resolved = chain.shift();
             const rejected = chain.shift();
-            promise = promise.then((res) => resolved(res, config), (err) => rejected(err, config));
+            promise = promise.then((res) => resolved(res, newConfig), (err) => rejected(err, newConfig));
         }
         return promise;
     }
