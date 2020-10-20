@@ -78,7 +78,7 @@ function bindEvent(config: IMergeAfterConfig, instance: any) {
 
 // 使用 `Object.setProrotypeOf` 会修改自己的隐性原型，把 `Promise` 重新指向成 `Object`
 function promiseInstanceBindData(promise: any, instance: any) {
-    promise.__proto__.example = instance;
+    // promise.__proto__.example = instance;
 
     return promise;
 }

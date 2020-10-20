@@ -53,6 +53,5 @@ function bindEvent(config, instance) {
     });
 }
 function promiseInstanceBindData(promise, instance) {
-    promise.__proto__.example = instance;
     return promise;
 }

@@ -58,11 +58,11 @@ export class MyRequest {
         return promise;
     }
 
-    abort(instance: any) {
-        try {
-            instance.example.abort();
-        } catch (e) {}
-    }
+    // abort(instance: any) {
+    //     try {
+    //         instance.example.abort();
+    //     } catch (e) {}
+    // }
 }
 
 ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'upload', 'download'].forEach(

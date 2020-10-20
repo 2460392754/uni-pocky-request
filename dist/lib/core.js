@@ -33,12 +33,6 @@ export class MyRequest {
         }
         return promise;
     }
-    abort(instance) {
-        try {
-            instance.example.abort();
-        }
-        catch (e) { }
-    }
 }
 ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'upload', 'download'].forEach((method) => {
     MyRequest.prototype[method] = function (url, config = {}) {

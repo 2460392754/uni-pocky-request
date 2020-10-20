@@ -8,5 +8,4 @@ export declare class MyRequest {
     };
     constructor(globalConfig: IMergeBeforeConfig);
     request(config: IMergeBeforeConfig): Promise<IMergeAfterConfig>;
-    abort(instance: any): void;
 }
